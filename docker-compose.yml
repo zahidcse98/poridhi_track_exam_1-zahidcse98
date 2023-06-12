@@ -47,4 +47,4 @@ services:
       - exam1
 
   networks:
-    exam-1:
+    exam1:

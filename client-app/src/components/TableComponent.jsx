@@ -1,7 +1,7 @@
 import { Alert, AlertTitle, Box, Button, Grid, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 
-const TableComponent = ({data: visitors, getVisitor, showCachedData}) => {
 
+const TableComponent = ({data: visitors, getVisitor, showCachedData}) => {
   const dataState = !showCachedData ? (<Alert severity="success">
   <AlertTitle>Success</AlertTitle>
   Showing updated Data
@@ -18,11 +18,13 @@ const TableComponent = ({data: visitors, getVisitor, showCachedData}) => {
     )
   } else if(visitors.length > 0) {
     dataToRender = visitors.map((visitor) => {
-      return (<TableRow key={visitor.uid}>
-      <TableCell align="right">{visitor.uid}</TableCell>
-      <TableCell align="right">{visitor.name}</TableCell>
-      <TableCell align="right">{visitor.email}</TableCell>
-      <TableCell align="right">{visitor.phone}</TableCell>
+      const {uid, name, email, phone, createdAt} = visitor;
+      return (<TableRow key={uid}>
+      <TableCell align="right">{uid}</TableCell>
+      <TableCell align="right">{name}</TableCell>
+      <TableCell align="right">{email}</TableCell>
+      <TableCell align="right">{phone}</TableCell>
+      <TableCell align="right">{createdAt}</TableCell>
       
     </TableRow>)
     })
@@ -30,12 +32,12 @@ const TableComponent = ({data: visitors, getVisitor, showCachedData}) => {
   }
     return (
         <Grid
-      item xs={12} sm={8} md={5}  elevation={6} 
+      item xs={12} md={8}  elevation={8} 
     >
       <Box
         sx={{
           my: 8,
-          mx: 4,
+          ml: -2,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -48,14 +50,15 @@ const TableComponent = ({data: visitors, getVisitor, showCachedData}) => {
         {visitors.length === 0 ? '' : dataState}
         </Stack>
         <Button sx={{marginTop: '10px', marginBottom: "10px"}} variant="contained" onClick={getVisitor}>Get Data</Button>
-<TableContainer>
+<TableContainer sx={{pr: "10px"}}>
       <Table  aria-label="caption table">
         <TableHead>
           <TableRow>
-            <TableCell>UID</TableCell>
+            <TableCell align="right">UID</TableCell>
             <TableCell align="right">Name</TableCell>
             <TableCell align="right">Email</TableCell>
             <TableCell align="right">Phone</TableCell>
+            <TableCell align="right">Entry Time</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

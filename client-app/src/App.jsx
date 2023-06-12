@@ -46,6 +46,7 @@ function App() {
       const {data} = await axios.get(baseURL);
       setServerData(data);
       setShowCachedData(false);
+      console.log(serverData)
     } catch(error) {
       console.log('fetching data failed!!');
     }
@@ -62,6 +63,7 @@ function App() {
 
   useEffect(() => {
     getVisitor();
+    
   },[])
 
   return (

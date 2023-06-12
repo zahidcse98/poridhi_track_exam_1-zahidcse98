@@ -3,7 +3,7 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 const FormComponent = ({handleSubmit, handleChange, inputData}) => {
   const {name, email, phone} = inputData;
     return (
-        <Grid item xs={12} sm={8} md={5}  elevation={6}>
+        <Grid item xs={12} sm={8} md={4}  elevation={6}>
       <Box
         sx={{
           my: 8,

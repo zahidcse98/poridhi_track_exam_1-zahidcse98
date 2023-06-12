@@ -27,7 +27,7 @@ const visitorSchema = new Schema({
         required: true,
         maxLength: 12
     }
-})
+}, {timestamps: true})
 
 const Visitor = new model("Visitor", visitorSchema);
 

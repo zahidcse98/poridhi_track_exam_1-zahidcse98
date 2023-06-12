@@ -1,14 +1,15 @@
 const Visitor = require('../models/visitor');
+const uid = require('uid');
 
 const router = require('express').Router();
 
 const findVisitor = (key, value) => {
     return Visitor.findOne({[key]: value})
 }
-
+console.log(uid.uid(5));
 const createNewVisitor = (name, email, phone) => {
 
-    const visitor = new Visitor({name, email, phone});
+    const visitor = new Visitor({uid:uid.uid(5), name, email, phone});
     console.log('visitor is: ',visitor);
     return visitor.save();
 }

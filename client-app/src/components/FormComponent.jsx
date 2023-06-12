@@ -1,9 +1,7 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 
-const FormComponent = () => {
-    const handleSubmit = () => {
-        console.log('hello');
-      }
+const FormComponent = ({handleSubmit, handleChange, inputData}) => {
+  const {name, email, phone} = inputData;
     return (
         <Grid item xs={12} sm={8} md={5}  elevation={6}>
       <Box
@@ -18,7 +16,7 @@ const FormComponent = () => {
         <Typography component="h1" variant="h5">
           Data Input
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -28,16 +26,34 @@ const FormComponent = () => {
             name="name"
             autoComplete="text"
             autoFocus
+            onChange={handleChange}
+            value={name}
+            inputProps={{min: 3, max: 30}}
+          />
+
+        <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="email"
+            label="Email Address"
+            type="email"
+            id="email"
+            autoComplete="Email Address"
+            onChange={handleChange}
+            value={email}
           />
           <TextField
             margin="normal"
             required
             fullWidth
-            name="mobile"
+            name="phone"
             label="Phone Number"
             type="number"
-            id="number"
+            id="phone"
             autoComplete="Mobile Number"
+            onChange={handleChange}
+            value={phone}
           />
           
           <Button

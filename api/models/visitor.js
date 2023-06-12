@@ -1,6 +1,11 @@
 const {model, Schema} = require('mongoose')
 
 const visitorSchema = new Schema({
+    uid: {
+        type: String,
+        required: true,
+        maxLength: 5
+    },
     name: {
         type: String,
         required: true,
@@ -20,8 +25,7 @@ const visitorSchema = new Schema({
     phone: {
         type: String,
         required: true,
-        maxLength: 12,
-        minLength: 6
+        maxLength: 12
     }
 })
 

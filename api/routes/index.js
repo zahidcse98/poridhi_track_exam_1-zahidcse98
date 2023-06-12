@@ -1,9 +1,10 @@
+require('dotenv').config({path: "../../.env"});
 const Visitor = require('../models/visitor');
 const uid = require('uid');
 const redis = require('redis');
 
 const router = require('express').Router();
-const redisClient = redis.createClient(6379,'127.17.0.3');
+const redisClient = redis.createClient(process.env.REDIS_PORT,`${process.env.REDIS_HOST}`);
 
 (async () => {
     await redisClient.connect();

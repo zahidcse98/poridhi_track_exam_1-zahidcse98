@@ -37,7 +37,7 @@ services:
     networks:
       - exam1
 
-  mondo:
+  mongo:
     container_name: "visitor-app-mongo"
     image: "mongo:latest"
     restart: always

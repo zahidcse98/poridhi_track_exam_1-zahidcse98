@@ -5,7 +5,7 @@ const redis = require('redis');
 
 const router = require('express').Router();
 const redisClient = redis.createClient(process.env.REDIS_PORT,`${process.env.REDIS_HOST}`);
-
+console.warn('host is: ',process.env.REDIS_HOST);
 (async () => {
     await redisClient.connect();
 })();
@@ -17,9 +17,6 @@ redisClient.on("error", function(error) {
     console.error('error in redis', error);
 })
 
-const findVisitor = (key, value) => {
-    return Visitor.findOne({[key]: value})
-}
 const createNewVisitor = (name, email, phone) => {
     const visitor = new Visitor({uid:uid.uid(5), name, email, phone});
     console.log('visitor is: ',visitor);
@@ -27,10 +24,7 @@ const createNewVisitor = (name, email, phone) => {
 }
 
 const registration = async(name, email, phone) => {
-    let visitor = await findVisitor('email', email);
-    if(visitor) {
-        return res.status(400).message('user already exists')
-    }
+    
     return createNewVisitor(name, email, phone);
 }
 

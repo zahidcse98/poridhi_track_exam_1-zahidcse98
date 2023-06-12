@@ -48,3 +48,4 @@ services:
 
   networks:
     exam1:
+      driver: bridge

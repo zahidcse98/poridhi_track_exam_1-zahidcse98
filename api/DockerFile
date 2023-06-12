@@ -1,0 +1,17 @@
+#starting from node base image
+FROM node:18.16.0
+
+#change the working directory
+WORKDIR /api
+
+
+#copy files
+COPY package.json .
+COPY yarn.lock .
+RUN yarn install
+
+#copy rest of files
+COPY . .
+
+#Start the server
+CMD ["yarn", "start"]

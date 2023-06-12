@@ -1,0 +1,50 @@
+version: "1"
+
+services:
+  client:
+    container_name: "clinet-app"
+    build: ./client-app/.
+    ports: -'3000:3000'
+    networks:
+      - exam1
+    depends_on:
+      - redis
+      - api-server
+      - mongo
+  api-server:
+    container_name: "api-server"
+    build: ./api-server/.
+    environment:
+      - PORT=8000
+      - DB_STRING=${DB_STRING}
+      - DB_NAME=${DB_NAME}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_HOST=${REDIS_HOST}
+    ports:
+      - "8000:8000"
+    networks:
+      - exam1
+    depends_on:
+      - mongo
+      - redis
+  redis:
+    container_name: "visitor-app-redis"
+    image: "redis:latest"
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - exam1
+
+  mondo:
+    container_name: "visitor-app-mongo"
+    image: "mongo:latest"
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - exam1
+
+  networks:
+    node-networks:
+      driver: exam1

@@ -1,7 +1,14 @@
-import { Box, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Alert, AlertTitle, Box, Button, Grid, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 
-const TableComponent = ({data: visitors}) => {
-  console.log('visitors is ', visitors.length);
+const TableComponent = ({data: visitors, getVisitor, showCachedData}) => {
+
+  const dataState = !showCachedData ? (<Alert severity="success">
+  <AlertTitle>Success</AlertTitle>
+  Showing updated Data
+</Alert>) : (<Alert severity="error">
+  <AlertTitle>Warning!!</AlertTitle>
+  Showing Cached Data!
+</Alert>)
   let dataToRender = null;
   if(visitors.length === 0) {
     dataToRender = (
@@ -20,7 +27,6 @@ const TableComponent = ({data: visitors}) => {
     </TableRow>)
     })
 
-    console.log(dataToRender);
   }
     return (
         <Grid
@@ -35,9 +41,13 @@ const TableComponent = ({data: visitors}) => {
           alignItems: 'center',
         }}
       >
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" sx={{marginBottom:'10px'}}>
           Data Display
         </Typography>
+        <Stack sx={{ width: '100%'}} spacing={2}>
+        {visitors.length === 0 ? '' : dataState}
+        </Stack>
+        <Button sx={{marginTop: '10px', marginBottom: "10px"}} variant="contained" onClick={getVisitor}>Get Data</Button>
 <TableContainer>
       <Table  aria-label="caption table">
         <TableHead>

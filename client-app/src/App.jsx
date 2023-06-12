@@ -7,13 +7,15 @@ import TableComponent from "./components/TableComponent";
 
 function App() {
   
+  const [showCachedData, setShowCachedData] = useState(false);
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputData)
     const {name, email, phone} = inputData;
     createVisitor({name, email, phone});
     dataReset();
-    getVisitor();
+    setShowCachedData(true);
   }
 
   const [inputData, setInputData] = useState({
@@ -42,8 +44,8 @@ function App() {
   const getVisitor = async() => {
     try {
       const {data} = await axios.get(baseURL);
-      console.log('result is:', data);
       setServerData(data);
+      setShowCachedData(false);
     } catch(error) {
       console.log('fetching data failed!!');
     }
@@ -52,7 +54,6 @@ function App() {
   const createVisitor = async({name, email, phone}) => {
     try {
       const {data} = await axios.post(baseURL, {name, email, phone});
-      console.log('Visitor added', data);
       return data;
     } catch(e) {
       console.log(e);
@@ -69,7 +70,7 @@ function App() {
     {/* Form item */}
     <FormComponent handleSubmit={handleSubmit} handleChange={handleChange} inputData={inputData} />
     {/* Table item  */}
-    <TableComponent data={serverData} />
+    <TableComponent data={serverData} getVisitor={getVisitor} showCachedData={showCachedData} />
   </Grid>
   )
 }

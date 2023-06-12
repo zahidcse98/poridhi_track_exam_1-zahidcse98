@@ -13,7 +13,7 @@ const server = http.createServer(app);
 
 connectDB(`${process.env.DB_STRING}/${process.env.DB_NAME}`)
     .then(() => {
-        console.log('Database Connected!!');
+        console.log('MongoDB Connected!!');
         server.listen(PORT, () => {
             console.log(`Server is connected on PORT: ${PORT}`);
         })

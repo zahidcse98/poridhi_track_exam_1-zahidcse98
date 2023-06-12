@@ -47,5 +47,4 @@ services:
       - exam1
 
   networks:
-    node-networks:
-      driver: exam1
+    exam-1:

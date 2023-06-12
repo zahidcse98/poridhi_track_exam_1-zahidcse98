@@ -4,7 +4,8 @@ services:
   client:
     container_name: "clinet-app"
     build: ./client-app/.
-    ports: -'3000:3000'
+    ports:
+      - "3000:3000"
     networks:
       - exam1
     depends_on:

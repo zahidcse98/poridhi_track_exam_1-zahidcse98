@@ -1,5 +1,5 @@
 import { Alert, AlertTitle, Box, Button, Grid, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-
+import moment from 'moment';
 
 const TableComponent = ({data: visitors, getVisitor, showCachedData}) => {
   const dataState = !showCachedData ? (<Alert severity="success">
@@ -19,12 +19,13 @@ const TableComponent = ({data: visitors, getVisitor, showCachedData}) => {
   } else if(visitors.length > 0) {
     dataToRender = visitors.map((visitor) => {
       const {uid, name, email, phone, createdAt} = visitor;
+      let time = moment(createdAt).fromNow();
       return (<TableRow key={uid}>
       <TableCell align="right">{uid}</TableCell>
       <TableCell align="right">{name}</TableCell>
       <TableCell align="right">{email}</TableCell>
       <TableCell align="right">{phone}</TableCell>
-      <TableCell align="right">{createdAt}</TableCell>
+      <TableCell align="right">{time.toLocaleString()}</TableCell>
       
     </TableRow>)
     })

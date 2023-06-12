@@ -46,6 +46,6 @@ services:
     networks:
       - exam1
 
-  networks:
-    exam1:
-      driver: bridge
+networks:
+  exam1:
+    driver: bridge
